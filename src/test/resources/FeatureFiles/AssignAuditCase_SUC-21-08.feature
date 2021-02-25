@@ -9,5 +9,12 @@ Scenario: UAT_M8-21-08-01-UAT_M8-21-08-02-Verify the Process of Assign Audit Cas
  Then switch to frame0
  And enters Audit reference number in search results
 And picks the audit case
+ And click assign button
+ Then Assign pop up is displayed
+ And search team to assign
+ And selects the team "Auditor Team"
+ Then Assign pop up is displayed
+ And assigns to the team or user
+
 
 

@@ -134,6 +134,8 @@ public class stepDefinitions extends BaseClass {
         WebDriverWait wait=new WebDriverWait(driver, 20);
         WebElement search = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("crmGrid_findCriteria")));
 //        search.sendKeys(sharedatastep.E_CRMARN);
+        search.clear();
+        Thread.sleep(1000);
     	search.sendKeys("*AV/000000020/2020");
         Thread.sleep(2000);
         search.sendKeys(Keys.ENTER);
@@ -149,8 +151,83 @@ public class stepDefinitions extends BaseClass {
         actions.doubleClick(pickCheckBox).perform();
 
         driver.switchTo().defaultContent();
-        Thread.sleep(9000);
     }
+
+    @And("^click assign button$")
+    public void click_assign_button() throws Throwable {
+        WebDriverWait wait=new WebDriverWait(driver, 20);
+        WebElement assignDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("moreCommands")));
+        assignDropdown.click();
+
+        WebElement assignButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("queueitem|NoRelationship|HomePageGrid|tbg.Mscrm.HomepageGrid.queueitem.Assign")));
+        assignButton.click();
+    }
+
+    @Then("^Assign pop up is displayed$")
+    public void assign_pop_up_is_displayed() throws Throwable {
+        WebDriverWait wait=new WebDriverWait(driver, 20);
+        WebElement assignPopup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("InlineDialog")));
+        Assert.assertTrue(assignPopup.isDisplayed());
+
+        driver.switchTo().frame("InlineDialog_Iframe");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+
+
+        WebElement popupHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assignheader_id")));
+        String popupHeaderText = popupHeader.getText();
+        Assert.assertEquals("Assign to Team or User", popupHeaderText);
+
+    }
+    @And("^search team to assign$")
+    public void search_team_to_assign() throws Throwable {
+        WebElement searchUserTeam = driver.findElement(By.xpath("//*[@id=\"systemuserview_id\"]/div[1]"));
+        searchUserTeam.click();
+
+        Thread.sleep(1000);
+        WebElement searchIcon = driver.findElement(By.id("systemuserview_id_lookupSearch"));
+        searchIcon.click();
+
+    }
+
+    @And("^selects the team \"([^\"]*)\"$")
+    public void assigns_to_team_something(String strArg1) throws Throwable {
+        WebDriverWait wait=new WebDriverWait(driver, 20);
+        WebElement loadMore = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@title='Look Up More Records']")));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", loadMore);
+        Thread.sleep(500);
+        loadMore.click();
+
+        driver.switchTo().defaultContent();
+        Thread.sleep(500);
+        driver.switchTo().frame("InlineDialog1_Iframe");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        WebElement lookforDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("selObjects")));
+        lookforDropdown.click();
+        Thread.sleep(3000);
+
+        WebElement team = driver.findElement(By.xpath("//*[text()='Team']"));
+        team.click();
+
+
+        String teamName = "BAL - "+ strArg1;
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);;
+        WebElement teamCheckbox = driver.findElement(By.xpath("//a[contains(@title,'"+teamName+"')]"));
+        Thread.sleep(2000);
+        teamCheckbox.click();
+
+        WebElement addButton = driver.findElement(By.xpath("//*[text()='Add']"));
+        addButton.click();
+    }
+
+    @And("^assigns to the team or user$")
+    public void assigns_to_the_team_or_user() throws Throwable {
+        WebElement addButton = driver.findElement(By.xpath("//*[text()='Assign']"));
+        addButton.click();
+    }
+
+
 
 
 
