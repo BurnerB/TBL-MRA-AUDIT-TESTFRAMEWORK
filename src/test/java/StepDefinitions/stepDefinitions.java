@@ -145,10 +145,11 @@ public class stepDefinitions extends BaseClass {
     public void enters_exemption_reference_number_in_search_results() throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 20);
         WebElement search = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("crmGrid_findCriteria")));
-//        search.sendKeys(sharedatastep.E_CRMARN);
+
         search.clear();
         Thread.sleep(1000);
-        search.sendKeys("*AV/000000450/2020");
+//        search.sendKeys("*AV/000000836/2021");
+        search.sendKeys("*"+sharedatastep.AUD_CRMARN);
         Thread.sleep(2000);
         search.sendKeys(Keys.ENTER);
 
@@ -175,6 +176,26 @@ public class stepDefinitions extends BaseClass {
         WebElement assignButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("queueitem|NoRelationship|HomePageGrid|tbg.Mscrm.HomepageGrid.queueitem.Assign")));
         assignButton.click();
     }
+    @And("^click pick button$")
+    public void click_pick_button() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebElement assignDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("moreCommands")));
+        assignDropdown.click();
+
+        WebElement pickButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("queueitem|NoRelationship|HomePageGrid|tbg.queueitem.HomepageGrid.Pick")));
+        pickButton.click();
+    }
+
+    @Then("^Click on reference number$")
+    public void click_on_reference_number() {
+        WebElement elementLocator = driver.findElement(By.xpath("//*[@id=\"gridBodyTable\"]/tbody/tr/td[1]"));
+
+        Actions actions = new Actions(driver);
+        actions.doubleClick(elementLocator).perform();
+
+        driver.switchTo().defaultContent();
+    }
+
 
     @Then("^Assign pop up is displayed$")
     public void assign_pop_up_is_displayed() throws Throwable {
@@ -241,16 +262,24 @@ public class stepDefinitions extends BaseClass {
         addButton.click();
     }
 
-    @And("^auditor picks the case$")
-    public void auditor_picks_the_case() throws Throwable {
-        WebElement elementLocator = driver.findElement(By.xpath("//*[@id=\"gridBodyTable\"]/tbody/tr/td[1]"));
-
-        Actions actions = new Actions(driver);
-        actions.doubleClick(elementLocator).perform();
-
-        driver.switchTo().defaultContent();
-        Thread.sleep(2000);
-    }
+//    @And("^auditor picks the case$")
+//    public void auditor_picks_the_case() throws Throwable {
+//
+//
+//
+//
+//
+//
+////        WebElement caseCheckbox = driver.findElement(By.xpath("//input[@type='checkbox' and title='Audit and Visit - "++"']"));
+//        WebElement caseCheckbox = driver.findElement(By.xpath("//input[@type='checkbox' and title='Audit and Visit - AV/000000834/2021']"));
+//        caseCheckbox.click();
+//
+//        Actions actions = new Actions(driver);
+//        actions.doubleClick(elementLocator).perform();
+//
+//        driver.switchTo().defaultContent();
+//        Thread.sleep(2000);
+//    }
 
     @And("^auditor selects team queue$")
     public void auditor_selects_team_queue() throws Throwable {
@@ -452,6 +481,74 @@ public class stepDefinitions extends BaseClass {
         }
         Thread.sleep(2000);
     }
+
+    @Given("^User navigates to Audit>>Create case manually$")
+    public void user_navigates_to_auditcreate_case_manually() throws Throwable {
+        driver.findElement(By.xpath(Pro.getProperty("Audit_Button"))).click();
+        driver.findElement(By.xpath(Pro.getProperty("Create_Case_Manually"))).click();
+
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    }
+
+    @And("^enters taxpayer details \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void enters_taxpayer_details_something_and_something(String strArg1, String strArg2) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement tinButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@type='submit' and span='Find']")));
+        tinButton.click();
+
+        WebElement frame = driver.findElement(By.tagName("iframe"));
+        //Switch to iframe to allow interaction with modal
+        driver.switchTo().frame(frame);
+
+        WebElement enterTin = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("SearchForm:accountNumber")));
+        enterTin.sendKeys(strArg1);
+
+        WebElement searchButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@type='submit' and span='Search']")));
+        searchButton.click();
+
+        boolean TIN= wait.until(ExpectedConditions.textToBePresentInElementValue(By.id("AuditAndVisitCaseForm:TIN"), strArg1));
+        Assert.assertTrue(TIN);
+
+
+
+        WebElement notesInput = driver.findElement(By.id("AuditAndVisitCaseForm:CaseNotes"));
+        notesInput.sendKeys(strArg2);
+
+    }
+
+    @And("^clicks on the create audit case button$")
+    public void clicks_on_the_create_audit_case_button() throws Throwable {
+        WebElement createButton = driver.findElement(By.xpath("//button[@type='submit' and span='Create']"));
+        createButton.click();
+    }
+
+    @Then("^Verify the ARN number \"([^\"]*)\"$")
+    public void verify_the_ARN_number_ARN(String ARN) throws Throwable {
+
+        WebDriverWait RefNumber = new WebDriverWait(driver, 150);
+        RefNumber.until(ExpectedConditions.elementToBeClickable(By.id(Pro.getProperty("Precessing_Completed_RefferenceNumber_ID")))).click();
+        // Capture ARN Number
+        String text = driver.findElement(By.id(Pro.getProperty("Precessing_Completed_RefferenceNumber_ID"))).getText();
+
+        System.out.println(text);
+        System.out.println("substring is " + text.substring(42));
+        sharedatastep.AUD_CRMARN = text.substring(42);
+
+
+
+        System.out.println(sharedatastep.AUD_CRMARN);
+        System.out.println("Actual ARN to be used in CRM is " + sharedatastep.AUD_CRMARN);
+
+        if (text.contains(ARN)) {
+            //  System.out.println(text);
+            System.out.println("Text Verified and passed");
+        } else {
+            System.out.println("Text Not Verified and failed");
+        }
+
+        Thread.sleep(5000);
+    }
+
 
 
 }
