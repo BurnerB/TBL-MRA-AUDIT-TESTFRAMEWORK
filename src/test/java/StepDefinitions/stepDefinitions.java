@@ -148,8 +148,8 @@ public class stepDefinitions extends BaseClass {
 
         search.clear();
         Thread.sleep(1000);
-//        search.sendKeys("*AV/000000836/2021");
-        search.sendKeys("*"+sharedatastep.AUD_CRMARN);
+        search.sendKeys("*AV/000000852/2021");
+//        search.sendKeys("*"+sharedatastep.AUD_CRMARN);
         Thread.sleep(2000);
         search.sendKeys(Keys.ENTER);
 
@@ -460,6 +460,91 @@ public class stepDefinitions extends BaseClass {
         Thread.sleep(2000);
     }
 
+    @And("^clicks Approve from the dropdown$")
+    public void clicks_Approve_from_the_dropdown() throws Throwable {
+
+        Actions action=new Actions(driver);
+        WebElement Outcome=driver.findElement(By.id(Pro.getProperty("Taxpayer_Accounting_Approval_Outcome_ID")));
+        WebElement hasLoaded= driver.findElement(By.id("header_process_tbg_approvaloutcome_lock"));
+
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Thread.sleep(7000);
+        if(hasLoaded.isDisplayed()) {
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            Thread.sleep(5000);
+        }else {
+            action.doubleClick(Outcome).build().perform();
+            Outcome.click();
+            action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
+        }
+
+    }
+
+    @And("^clicks reject from the dropdown$")
+    public void clicks_discontinue_from_the_dropdown() throws Throwable {
+
+        Actions action=new Actions(driver);
+        WebElement Outcome=driver.findElement(By.id(Pro.getProperty("Taxpayer_Accounting_Approval_Outcome_ID")));
+        WebElement hasLoaded= driver.findElement(By.id("header_process_tbg_approvaloutcome_lock"));
+
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Thread.sleep(7000);
+        if(hasLoaded.isDisplayed()) {
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            Thread.sleep(5000);
+        }else {
+            action.doubleClick(Outcome).build().perform();
+            Outcome.click();
+            action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
+        }
+
+    }
+
+
+
+    @Then("^Click on Save button$")
+    public void click_on_Save_button() throws Throwable {
+        Thread.sleep(2000);
+        driver.switchTo().defaultContent();
+        driver.findElement(By.id("tbg_auditapplication|NoRelationship|Form|Mscrm.Form.tbg_auditapplication.Save")).click();
+
+
+    }
+
+    @And("^enters manager comments \"([^\"]*)\"$")
+    public void enters_manager_comments_something(String strArg1) throws Throwable {
+        WebElement managerCommentsInput = driver.findElement(By.id("Manager Comments_label"));
+        managerCommentsInput.click();
+        Thread.sleep(2000);
+
+        WebElement managerCommentsInputBox = driver.findElement(By.id("tbg_managercomments_i"));
+        managerCommentsInputBox.sendKeys(strArg1);
+
+    }
+
+    @Then("^Enter Outcome Notes (.+)$")
+    public void enter_outcome_notes(String Notes) throws Throwable {
+        Thread.sleep(3000);
+        Actions action1 = new Actions(driver);
+        WebElement element1 = driver.findElement(By.id(("Notes_label")));
+        element1.click();
+        Thread.sleep(1000);
+        driver.findElement(By.id("tbg_outcomenotes_i")).sendKeys(Notes);
+        Thread.sleep(5000);
+    }
+
+    @Then("^Enter Outcome Reason$")
+    public void enter_Outcome_Reason() throws Throwable {
+        Thread.sleep(2000);
+        WebElement specificframe = (driver.findElement(By.id(Pro.getProperty("OutComeReason_Frame_ID"))));
+        driver.switchTo().frame(specificframe);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElement(By.id("viewoptionReject")).click();
+        WebDriverWait ReasonValue = new WebDriverWait(driver, 60);
+        ReasonValue.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"statuscode_i_reject\"]/option[2]"))).click();
+        Thread.sleep(8000);
+    }
+
     @Then("^validation error displayed \"([^\"]*)\"$")
     public void validation_error_displayed_something(String strArg1) throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -481,6 +566,24 @@ public class stepDefinitions extends BaseClass {
         }
         Thread.sleep(2000);
     }
+
+    @Then("^validation audit error displayed \"([^\"]*)\"$")
+    public void validation_audit_error_displayed(String strArg1) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        WebElement image = driver.findElement(By.id("tbg_outcomenotes_warn"));
+        if(image.isDisplayed())
+        {
+            System.out.println("Text Verified and"+strArg1);
+        }
+        else
+        {
+            System.out.println("Text Not Verfied and failed");
+        }
+        Thread.sleep(2000);
+    }
+
 
     @Given("^User navigates to Audit>>Create case manually$")
     public void user_navigates_to_auditcreate_case_manually() throws Throwable {
@@ -547,6 +650,15 @@ public class stepDefinitions extends BaseClass {
         }
 
         Thread.sleep(5000);
+    }
+
+
+    @And("^wait for plan to load \"([^\"]*)\"$")
+    public void wait_for_duplicate_check(String strArg1) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 200);
+        WebElement frame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("WebResource_AuditApplicationAngular")));
+        driver.switchTo().frame(frame);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[text()='"+strArg1+"']")));
     }
 
 
