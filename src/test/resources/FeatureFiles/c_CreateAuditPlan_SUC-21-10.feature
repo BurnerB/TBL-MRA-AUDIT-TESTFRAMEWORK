@@ -9,7 +9,7 @@ Feature: [SUC:21-10] Create Audit Plan
     Then switch to frame0
     And enters Audit reference number in search results
     And picks the audit case
-    Then create audit plan page is displayed
+    Then create " audit plan page " is displayed
     When clicks create audit plan
     Then switch to frame1
     And verifies " 1. AUDIT PLAN PARTICULARS " entry fields are displayed
@@ -40,7 +40,7 @@ Feature: [SUC:21-10] Create Audit Plan
     And click pick button
     Then switch to frame0
     Then Click on reference number
-    Then create audit plan page is displayed
+    Then create Create Audit Plan page is displayed
     When clicks create audit plan
     Then switch to frame1
     And verifies " 1. AUDIT PLAN PARTICULARS " entry fields are displayed
