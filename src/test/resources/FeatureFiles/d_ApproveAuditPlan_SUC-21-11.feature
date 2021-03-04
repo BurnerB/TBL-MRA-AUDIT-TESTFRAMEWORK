@@ -21,7 +21,7 @@ Feature: [SUC:21-11] Approve Audit Plan
     And Click on Save button
     Then Audit status should be "Audit Plan Approved"
 
-  @UAT_M8-21-11-03 @CREATE
+  @UAT_M8-21-11-03
   Scenario: UAT_M8-21-11-03-Verify the Process of  Return Audit Plan for Revision
     Given Open CRM URL Module as "AuditManager1"
     And Close Popup Window
@@ -44,7 +44,7 @@ Feature: [SUC:21-11] Approve Audit Plan
     And Click on Save button
     Then Audit status should be "Planning"
 
-  @UAT_M8-21-11-04 @CREATE--
+  @UAT_M8-21-11-04
   Scenario: UAT_M8-21-11-04-Verify the Process of  Validation Failed
     Given Open CRM URL Module as "AuditManager1"
     And Close Popup Window
