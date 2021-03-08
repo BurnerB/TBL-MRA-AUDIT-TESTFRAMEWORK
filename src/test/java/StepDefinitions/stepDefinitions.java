@@ -148,7 +148,7 @@ public class stepDefinitions extends BaseClass {
 
         search.clear();
         Thread.sleep(2000);
-//        search.sendKeys("*AV/000000861/2021");
+//        search.sendKeys("*AV/000000868/2021");
         search.sendKeys("*"+sharedatastep.AUD_CRMARN);
         Thread.sleep(2000);
         search.sendKeys(Keys.ENTER);
@@ -276,25 +276,6 @@ public class stepDefinitions extends BaseClass {
         addButton.click();
     }
 
-//    @And("^auditor picks the case$")
-//    public void auditor_picks_the_case() throws Throwable {
-//
-//
-//
-//
-//
-//
-////        WebElement caseCheckbox = driver.findElement(By.xpath("//input[@type='checkbox' and title='Audit and Visit - "++"']"));
-//        WebElement caseCheckbox = driver.findElement(By.xpath("//input[@type='checkbox' and title='Audit and Visit - AV/000000834/2021']"));
-//        caseCheckbox.click();
-//
-//        Actions actions = new Actions(driver);
-//        actions.doubleClick(elementLocator).perform();
-//
-//        driver.switchTo().defaultContent();
-//        Thread.sleep(2000);
-//    }
-
     @And("^auditor selects team queue$")
     public void auditor_selects_team_queue() throws Throwable {
         driver.switchTo().defaultContent();
@@ -307,18 +288,20 @@ public class stepDefinitions extends BaseClass {
         team.click();
     }
 
-    @Then("^create \"([^\"]*)\" is displayed$")
-    public void create_something_is_displayed(String strArg1) throws Throwable {
-        driver.switchTo().defaultContent();
-        WebDriverWait wait = new WebDriverWait(driver, 100);
-//        WebElement createAuditPlan = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+strArg1+"']")));
-
-        WebElement createAuditPlan = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='"+strArg1+"']")));
-
-
-
-        Assert.assertTrue(createAuditPlan.isDisplayed());
-    }
+//    @Then("^create \"([^\"]*)\" is displayed$")
+//    public void create_something_is_displayed(String strArg1) throws Throwable {
+//        driver.switchTo().defaultContent();
+//        WebDriverWait wait = new WebDriverWait(driver, 100);
+//        //*[@id="tbg_auditapplication|NoRelationship|Form|tbg.tbg_auditapplication.CreatePreliminaryAuditFindings.Button"]/span/a/span
+//
+//        WebElement createAuditPlan = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"tbg_auditapplication|NoRelationship|Form|tbg.tbg_auditapplication.CreatePreliminaryAuditFindings.Button")));
+//
+////        WebElement createAuditPlan = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='"+strArg1+"']")));
+//
+//
+//
+//        Assert.assertTrue(createAuditPlan.isDisplayed());
+//    }
 
 
     @When("^clicks create audit plan$")
@@ -331,11 +314,23 @@ public class stepDefinitions extends BaseClass {
 
     @When("^clicks create preliminary audit$")
     public void clicks_create_preliminary_audit() throws Throwable {
+        Thread.sleep(500);
+        driver.switchTo().defaultContent();
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        WebElement createAuditPlan = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"tbg_auditapplication|NoRelationship|Form|tbg.tbg_auditapplication.CreatePreliminaryAuditFindings.Button\"]/span/a/span")));
+        WebElement createAuditPlan = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"tbg_auditapplication|NoRelationship|Form|tbg.tbg_auditapplication.CreatePreliminaryAuditFindings.Button\"]/span")));
         createAuditPlan.click();
 
     }
+    @When("^clicks Create Final Audit Report$")
+    public void clicks_create_final_audit_report() throws Throwable {
+        Thread.sleep(500);
+        driver.switchTo().defaultContent();
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement createAuditPlan = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"tbg_auditapplication|NoRelationship|Form|tbg.tbg_auditapplication.CreateFinalAuditReport.Button\"]/span/a/span")));
+        createAuditPlan.click();
+    }
+
+
 
     @And("^verifies \"([^\"]*)\" entry fields are displayed$")
     public void verifies_something_entry_fields_are_displayed(String strArg1) throws Throwable {
@@ -348,6 +343,41 @@ public class stepDefinitions extends BaseClass {
         Assert.assertTrue(createAuditPlan.isDisplayed());
 
     }
+
+    @When("^selects FINAL AUDIT FINDINGS$")
+    public void selects_final_audit_findings() throws Throwable {
+        WebElement auditFinding= driver.findElement(By.xpath("//*[@id=\"finalAuditReport\"]/div[5]/div/app-audit-findings/div/div[2]/div/p-table/div/div[1]/table/tbody/tr"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", auditFinding);
+        Thread.sleep(500);
+        auditFinding.click();
+    }
+
+    @When("^selects ASSESSMENT DETAILS$")
+    public void selects_assessment_details() throws Throwable {
+        Actions action=new Actions(driver);
+        WebElement assesmentDetails= driver.findElement(By.xpath("//*[@id=\"finalAuditReport\"]/div[6]/div/div/div[2]/tb-dropdown/div/div[2]/div/p-dropdown/div/label"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", assesmentDetails);
+        Thread.sleep(500);
+        assesmentDetails.click();
+        Thread.sleep(2000);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement taxtypeSelect = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"finalAuditReport\"]/div[6]/div/div/div[2]/tb-dropdown/div/div[2]/div/p-dropdown/div/div[4]/div[2]/ul/li[2]/span")));
+        taxtypeSelect.click();
+    }
+
+    @And("^clicks update final audit findings button$")
+    public void clicks_update_final_audit_findings_button() throws Throwable {
+        WebElement submitButton = driver.findElement(By.xpath("//*[text()=' Update ']"));
+        submitButton.click();
+    }
+
+    @And("^clicks add assesment details button$")
+    public void clicks_add_assesment_details_button() throws Throwable {
+
+        WebElement submitButton = driver.findElement(By.xpath("//*[text()=' Add ']"));
+        submitButton.click();
+    }
+
 
     @DataTableType(replaceWithEmptyString = "[blank]")
     public String stringType(String cell) {
@@ -438,6 +468,80 @@ public class stepDefinitions extends BaseClass {
 
     }
 
+    @When("^enters FINAL AUDIT REPORT details$")
+    public void enters_final_audit_report_details(DataTable auditTable) throws Throwable {
+        Actions builder = new Actions(driver);
+        //Initialize data table
+        List<List<String>> data = auditTable.asLists();
+
+        WebElement addressPostalInput = driver.findElement(By.xpath("//*[@id=\"finalAuditReport\"]/div[2]/app-pre-audit-finding-particulars/div/form/div[2]/div[1]/tb-input-text-area[1]/div/div[2]/div/textarea"));
+        addressPostalInput.sendKeys(data.get(0).get(1));
+
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        WebElement addressVisitedInput = driver.findElement(By.xpath("//*[@id=\"finalAuditReport\"]/div[2]/app-pre-audit-finding-particulars/div/form/div[2]/div[1]/tb-input-text-area[2]/div/div[2]/div/textarea"));
+        addressVisitedInput.sendKeys(data.get(1).get(1));
+
+
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        WebElement datesVisitedINput = driver.findElement(By.xpath("//*[@id=\"finalAuditReport\"]/div[2]/app-pre-audit-finding-particulars/div/form/div[2]/div[1]/tb-input-text-area[3]/div/div[2]/div/textarea"));
+        datesVisitedINput.sendKeys(data.get(2).get(1));
+
+        WebElement numberVisitsInput = driver.findElement(By.xpath("//*[@id=\"finalAuditReport\"]/div[2]/app-pre-audit-finding-particulars/div/form/div[2]/div[1]/tb-png-input-number/div/div[2]/div/span/input"));
+        numberVisitsInput.sendKeys(data.get(3).get(1));
+
+
+        WebElement contactPersonInput = driver.findElement(By.xpath("//*[@id=\"finalAuditReport\"]/div[2]/app-pre-audit-finding-particulars/div/form/div[2]/div[2]/tb-input-text/div/div[2]/div/input"));
+        contactPersonInput.sendKeys(data.get(4).get(1));
+
+        WebElement subjectInput = driver.findElement(By.xpath("//*[@id=\"finalAuditReport\"]/div[3]/div/div[1]/tb-input-text-area/div/div[2]/div/textarea"));
+        subjectInput.sendKeys(data.get(5).get(1));
+
+
+        WebElement backgroundInfo = driver.findElement(By.xpath("//*[@id=\"finalAuditReport\"]/div[4]/div/div[1]/tb-input-text-area/div/div[2]/div/textarea"));
+        backgroundInfo.sendKeys(data.get(6).get(1));
+
+
+        WebElement conslusionInput = driver.findElement(By.xpath("//*[@id=\"finalAuditReport\"]/div[10]/div/div[1]/tb-input-text-area/div/div[2]/div/textarea"));
+        conslusionInput.sendKeys(data.get(7).get(1));
+
+    }
+
+    @When("^enters updated FINAL AUDIT REPORT details(.+) and (.+)$")
+    public void enters_updated_final_audit_report_details_and(String updatedinfo, String particulars) throws Throwable {
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement updateInfo = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-audit-finding/div/form/div[1]/div/div[3]/p-editor/div/div[2]/div[1]")));
+        updateInfo.sendKeys(updatedinfo);
+
+
+        WebElement updateParticulars = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-audit-finding/div/form/div[1]/div/div[4]/tb-input-text/div/div[2]/div/input")));
+        updateParticulars.sendKeys(particulars);
+
+    }
+
+    @When("^enters OFFICERS ASSESMENT details(.+) and (.+)$")
+    public void enters_officers_assesment_details_and(String addressee, String address) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement addresseeInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-officer-assessment/div/form/div[2]/div[3]/div[1]/tb-input-text-area/div/div[2]/div/textarea")));
+        addresseeInput.sendKeys(addressee);
+
+
+        WebElement addressInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-officer-assessment/div/form/div[2]/div[3]/div[2]/tb-input-text-area/div/div[2]/div/textarea")));
+        addressInput.sendKeys(address);
+    }
+
+    @And("^clicks ok on update Info$")
+    public void clicks_ok_on_update_info() throws Throwable {
+            WebElement okButton = driver.findElement(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-audit-finding/div/form/div[2]/div/div/button[1]"));
+        okButton.click();
+    }
+
+    @And("^clicks officers assesment submit$")
+    public void clicks_officers_assesment_submit() throws Throwable {
+        WebElement submitButton = driver.findElement(By.xpath("/html/body/trips-app/div/app-audit/app-officer-assessment/div/form/div[3]/div/div/button[2]"));
+        submitButton.click();
+    }
+
     @And("^enters AUDIT SCOPE METHODOLOGY$")
     public void enters_audit_scope_methodology(DataTable auditScopeTable ) throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -511,6 +615,20 @@ public class stepDefinitions extends BaseClass {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         WebElement submitButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-pre-audit-finding/div/div/form/div[9]/div/div/button")));
+
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
+        Thread.sleep(500);
+        submitButton.click();
+
+        Thread.sleep(500);
+        driver.switchTo().defaultContent();
+    }
+
+    @And("^Clicks submit Submit Final Audit Report button$")
+    public void clicks_submit_submit_final_audit_report_button() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+
+        WebElement submitButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-final-audit-report/div/form/div[2]/div/div/button[2]")));
 
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", submitButton);
         Thread.sleep(500);
@@ -669,6 +787,26 @@ public class stepDefinitions extends BaseClass {
         }
         Thread.sleep(2000);
     }
+    @Then("^final audit validation error is displayed \"([^\"]*)\"$")
+    public void final_audit_validation_error_is_displayed_something(String strArg1) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+
+        WebElement loadFrame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("WebResource_AuditApplicationAngular")));
+        driver.switchTo().frame(loadFrame);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"finalAuditReport\"]/div[10]/div/div[1]/tb-input-text-area/div/div[2]/control-messages/div/div"))).getText();
+        if(text.contains(strArg1))
+        {
+            System.out.println("Text Verified and"+strArg1);
+        }
+        else
+        {
+            System.out.println("Text Not Verfied and failed");
+        }
+        Thread.sleep(2000);
+    }
+
 
     @Then("^validation audit error displayed \"([^\"]*)\"$")
     public void validation_audit_error_displayed(String strArg1) throws Throwable {

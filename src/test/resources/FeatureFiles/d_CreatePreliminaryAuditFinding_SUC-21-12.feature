@@ -12,7 +12,7 @@ Feature: [SUC:21-12] Create Preliminary Audit Finding
     And click pick button
     Then switch to frame0
     Then Click on reference number
-    Then create " Create Preliminary Audit Findings " is displayed
+    Then Audit status should be "Audit Plan Approved"
     When clicks create preliminary audit
     Then switch to frame1
     And verifies " PRELIMINARY AUDIT FINDING " entry fields are displayed
@@ -57,7 +57,7 @@ Feature: [SUC:21-12] Create Preliminary Audit Finding
     And click pick button
     Then switch to frame0
     Then Click on reference number
-    Then create " Create Preliminary Audit Findings " is displayed
+    Then Audit status should be "Audit Plan Approved"
     When clicks create preliminary audit
     Then switch to frame1
     And verifies " PRELIMINARY AUDIT FINDING " entry fields are displayed

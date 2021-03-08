@@ -9,7 +9,7 @@ Feature: [SUC:21-10] Create Audit Plan
     Then switch to frame0
     And enters Audit reference number in search results
     And picks the audit case
-    Then create " audit plan page " is displayed
+    Then Audit status should be "Open"
     When clicks create audit plan
     Then switch to frame1
     And verifies " 1. AUDIT PLAN PARTICULARS " entry fields are displayed
