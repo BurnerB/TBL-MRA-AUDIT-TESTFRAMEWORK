@@ -148,8 +148,8 @@ public class stepDefinitions extends BaseClass {
 
         search.clear();
         Thread.sleep(2000);
-//        search.sendKeys("*AV/000000868/2021");
-        search.sendKeys("*"+sharedatastep.AUD_CRMARN);
+        search.sendKeys("*AV/000000869/2021");
+//        search.sendKeys("*"+sharedatastep.AUD_CRMARN);
         Thread.sleep(2000);
         search.sendKeys(Keys.ENTER);
 
