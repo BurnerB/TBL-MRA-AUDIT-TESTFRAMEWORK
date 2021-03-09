@@ -148,7 +148,7 @@ public class stepDefinitions extends BaseClass {
 
         search.clear();
         Thread.sleep(2000);
-        search.sendKeys("*AV/000000869/2021");
+        search.sendKeys("*AV/000000875/2021");
 //        search.sendKeys("*"+sharedatastep.AUD_CRMARN);
         Thread.sleep(2000);
         search.sendKeys(Keys.ENTER);
@@ -378,6 +378,11 @@ public class stepDefinitions extends BaseClass {
         submitButton.click();
     }
 
+    @And("^clicks update assesment details button$")
+    public void clicks_update_assesment_details_button() throws Throwable {
+        WebElement submitButton = driver.findElement(By.xpath("//*[@id=\"finalAuditReport\"]/div[6]/div/div/div[3]/button[2]"));
+        submitButton.click();
+    }
 
     @DataTableType(replaceWithEmptyString = "[blank]")
     public String stringType(String cell) {
@@ -538,7 +543,8 @@ public class stepDefinitions extends BaseClass {
 
     @And("^clicks officers assesment submit$")
     public void clicks_officers_assesment_submit() throws Throwable {
-        WebElement submitButton = driver.findElement(By.xpath("/html/body/trips-app/div/app-audit/app-officer-assessment/div/form/div[3]/div/div/button[2]"));
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement submitButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-officer-assessment/div/form/div[3]/div/div/button[2]")));
         submitButton.click();
     }
 
@@ -643,19 +649,7 @@ public class stepDefinitions extends BaseClass {
         driver.switchTo().frame("contentIFrame1");
         WebDriverWait wait = new WebDriverWait(driver,30);
         Thread.sleep(3000);
-
-//        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Status_label"))).getText();
-
         String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+Status+"']"))).getText();
-//        if(text.contains(Status))
-//        {
-//
-//            System.out.println("Text Verified and"+Status);
-//        }
-//        else
-//        {
-//            System.out.println("Text Not Verfied and failed");
-//        }
         Assert.assertEquals(Status,text);
         Thread.sleep(2000);
     }
@@ -796,6 +790,26 @@ public class stepDefinitions extends BaseClass {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"finalAuditReport\"]/div[10]/div/div[1]/tb-input-text-area/div/div[2]/control-messages/div/div"))).getText();
+        if(text.contains(strArg1))
+        {
+            System.out.println("Text Verified and"+strArg1);
+        }
+        else
+        {
+            System.out.println("Text Not Verfied and failed");
+        }
+        Thread.sleep(2000);
+    }
+
+    @Then("^final officers assesment validation error is displayed \"([^\"]*)\"$")
+    public void final_officers_assesment_validation_error_is_displayed_something(String strArg1) throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+
+        WebElement loadFrame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("WebResource_AuditApplicationAngular")));
+        driver.switchTo().frame(loadFrame);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+        String text = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-officer-assessment/div/form/div[2]/div[3]/div[2]/tb-input-text-area/div/div[2]/control-messages/div/div"))).getText();
         if(text.contains(strArg1))
         {
             System.out.println("Text Verified and"+strArg1);
