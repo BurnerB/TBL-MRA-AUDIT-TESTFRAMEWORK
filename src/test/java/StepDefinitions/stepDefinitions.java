@@ -46,6 +46,28 @@ import io.cucumber.junit.Cucumber;
 public class stepDefinitions extends BaseClass {
     public Properties Pro;
     public static WebDriver driver;
+    public WebDriverWait five = new WebDriverWait(driver, 5);
+    public WebDriverWait ten = new WebDriverWait(driver, 10);
+    public WebDriverWait fifteen = new WebDriverWait(driver, 15);
+    public WebDriverWait twenty = new WebDriverWait(driver, 20);
+    public WebDriverWait twentyfive = new WebDriverWait(driver, 25);
+    public WebDriverWait thirty = new WebDriverWait(driver, 30);
+    public WebDriverWait thirtyfive = new WebDriverWait(driver, 35);
+    public WebDriverWait fourty = new WebDriverWait(driver, 40);
+    public WebDriverWait fourtyfive = new WebDriverWait(driver, 45);
+    public WebDriverWait fifty = new WebDriverWait(driver, 50);
+    public WebDriverWait fiftyfive = new WebDriverWait(driver, 55);
+    public WebDriverWait sixty = new WebDriverWait(driver, 60);
+    public WebDriverWait sixtyfive = new WebDriverWait(driver, 65);
+    public WebDriverWait seventy = new WebDriverWait(driver, 70);
+    public WebDriverWait seventyfive = new WebDriverWait(driver, 75);
+    public WebDriverWait eighty = new WebDriverWait(driver, 80);
+    public WebDriverWait eightyfive = new WebDriverWait(driver, 85);
+    public WebDriverWait ninety = new WebDriverWait(driver, 90);
+    public WebDriverWait ninetyfive = new WebDriverWait(driver, 95);
+    public WebDriverWait onehundred = new WebDriverWait(driver, 100);
+    public WebDriverWait twohundred = new WebDriverWait(driver, 200);
+
 
     public static sharedatastep sharedata;
 
@@ -765,6 +787,39 @@ public class stepDefinitions extends BaseClass {
     }
 
 
+    @Then("Navigate to audit > Mantain risk bands")
+    public void navigateToAuditMantainRiskBands() {
+       thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Audit']"))).click();
+       thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Maintain Risk Bands']"))).click();
+    }
+
+    @Then("Verify fields in Mantain risk bands screen")
+    public void verifyFieldsInMantainRiskBandsScreen() {
+
+        //buttons
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainAuditRiskBands:RiskBandTable:btnAddRiskBand"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainAuditRiskBands:RiskBandTable:btnUpdateRiskBand"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainAuditRiskBands:RiskBandTable:btnViewRiskBand"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainAuditRiskBands:SaveRiskBand"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainAuditRiskBands:Cancel"))).isDisplayed();
+        //table columns
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Risk Band Code']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Description']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='From']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='To']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='No. of Days']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='No. of Officers']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Officer Grade']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='No. of Audits Performed']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Audit Frequency']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Status']"))).isDisplayed();
+
+    }
+
+    @Then("Click add to open add risk bands frame")
+    public void clickAddToOpenAddRiskBandsFrame() {
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainAuditRiskBands:RiskBandTable:btnAddRiskBand"))).click();
+    }
 
 }
 
