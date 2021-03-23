@@ -6,6 +6,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -42,31 +43,33 @@ import io.cucumber.java.en.When;
 import io.cucumber.junit.Cucumber;
 
 
+
+
 @RunWith(Cucumber.class)
-public class stepDefinitions extends BaseClass {
+public class stepDefinitions extends BaseClass  {
     public Properties Pro;
-    public static WebDriver driver;
-    public WebDriverWait five = new WebDriverWait(driver, 5);
-    public WebDriverWait ten = new WebDriverWait(driver, 10);
-    public WebDriverWait fifteen = new WebDriverWait(driver, 15);
-    public WebDriverWait twenty = new WebDriverWait(driver, 20);
-    public WebDriverWait twentyfive = new WebDriverWait(driver, 25);
-    public WebDriverWait thirty = new WebDriverWait(driver, 30);
-    public WebDriverWait thirtyfive = new WebDriverWait(driver, 35);
-    public WebDriverWait fourty = new WebDriverWait(driver, 40);
-    public WebDriverWait fourtyfive = new WebDriverWait(driver, 45);
-    public WebDriverWait fifty = new WebDriverWait(driver, 50);
-    public WebDriverWait fiftyfive = new WebDriverWait(driver, 55);
-    public WebDriverWait sixty = new WebDriverWait(driver, 60);
-    public WebDriverWait sixtyfive = new WebDriverWait(driver, 65);
-    public WebDriverWait seventy = new WebDriverWait(driver, 70);
-    public WebDriverWait seventyfive = new WebDriverWait(driver, 75);
-    public WebDriverWait eighty = new WebDriverWait(driver, 80);
-    public WebDriverWait eightyfive = new WebDriverWait(driver, 85);
-    public WebDriverWait ninety = new WebDriverWait(driver, 90);
-    public WebDriverWait ninetyfive = new WebDriverWait(driver, 95);
-    public WebDriverWait onehundred = new WebDriverWait(driver, 100);
-    public WebDriverWait twohundred = new WebDriverWait(driver, 200);
+    public WebDriverWait five;
+    public WebDriverWait ten ;
+    public WebDriverWait fifteen;
+    public WebDriverWait twenty ;
+    public WebDriverWait twentyfive;
+    public WebDriverWait thirty;
+    public WebDriverWait thirtyfive;
+    public WebDriverWait fourty;
+    public WebDriverWait fourtyfive;
+    public WebDriverWait fifty;
+    public WebDriverWait fiftyfive;
+    public WebDriverWait sixty;
+    public WebDriverWait sixtyfive;
+    public WebDriverWait seventy;
+    public WebDriverWait seventyfive;
+    public WebDriverWait eighty;
+    public WebDriverWait eightyfive;
+    public WebDriverWait ninety;
+    public WebDriverWait ninetyfive;
+    public WebDriverWait onehundred;
+    public WebDriverWait twohundred;
+
 
 
     public static sharedatastep sharedata;
@@ -82,12 +85,34 @@ public class stepDefinitions extends BaseClass {
         Pro = new Properties();
         FileInputStream fls = new FileInputStream("src\\test\\resources\\global.properties");
         Pro.load(fls);
+        driver = BaseClass.getDriver();
+        five = new WebDriverWait(driver, 5);
+        ten = new WebDriverWait(driver, 10);
+        fifteen = new WebDriverWait(driver, 15);
+        twenty = new WebDriverWait(driver, 20);
+        twentyfive = new WebDriverWait(driver, 25);
+        thirty = new WebDriverWait(driver, 30);
+        thirtyfive = new WebDriverWait(driver, 35);
+        fourty = new WebDriverWait(driver, 40);
+        fourtyfive = new WebDriverWait(driver, 45);
+        fifty = new WebDriverWait(driver, 50);
+        fiftyfive = new WebDriverWait(driver, 55);
+        sixty = new WebDriverWait(driver, 60);
+        sixtyfive = new WebDriverWait(driver, 65);
+        seventy = new WebDriverWait(driver, 70);
+        seventyfive = new WebDriverWait(driver, 75);
+        eighty = new WebDriverWait(driver, 80);
+        eightyfive = new WebDriverWait(driver, 85);
+        ninety = new WebDriverWait(driver, 90);
+        ninetyfive = new WebDriverWait(driver, 95);
+        onehundred = new WebDriverWait(driver, 100);
+        twohundred = new WebDriverWait(driver, 200);
 
     }
 
     @Given("^User navigates to the login page$")
     public void user_navigates_to_the_login_page() throws Throwable {
-        driver = BaseClass.getDriver();
+
 //    	intergtation link for backoffice
 //    	driver.get("http://18.202.88.7:8001/trips-ui/faces/login/tripsLogin.xhtml");
 
@@ -118,7 +143,7 @@ public class stepDefinitions extends BaseClass {
     //---------------------------------------------------------------------Verify the Process of Assign Audit Case-----------------------------------------------------------------------------------------------//
     @Given("^Open CRM URL Module as \"([^\"]*)\"$")
     public void open_crm_url_module_as_something(String strArg1) throws Throwable {
-        driver = BaseClass.getDriver();
+        driver = getDriver();
         driver.get("https://" + strArg1 + ":Passw0rd@trips-crm.mra.mw:5555/TripsWorkflow/main.aspx");
     }
 
@@ -955,16 +980,16 @@ public class stepDefinitions extends BaseClass {
         ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainAuditRiskBands:SaveRiskBand"))).isDisplayed();
         ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainAuditRiskBands:Cancel"))).isDisplayed();
         //table columns
-        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Risk Band Code']"))).isDisplayed();
-        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Description']"))).isDisplayed();
-        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='From']"))).isDisplayed();
-        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='To']"))).isDisplayed();
-        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='No. of Days']"))).isDisplayed();
-        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='No. of Officers']"))).isDisplayed();
-        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Officer Grade']"))).isDisplayed();
-        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='No. of Audits Performed']"))).isDisplayed();
-        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Audit Frequency']"))).isDisplayed();
-        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Status']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[span='Risk Band Code']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[span='Description']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[span='From']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[span='To']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[span='No. of Days']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[span='No. of Officers']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[span='Officer Grade']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[span='No. of Audits Performed']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[span='Audit Frequency']"))).isDisplayed();
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//th[span='Status']"))).isDisplayed();
 
     }
 
@@ -973,6 +998,392 @@ public class stepDefinitions extends BaseClass {
         ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainAuditRiskBands:RiskBandTable:btnAddRiskBand"))).click();
     }
 
+    @Then("Verify fields in add risk band frame")
+    public void verifyFieldsInAddRiskBandFrame() {
+        fifteen.until(ExpectedConditions.visibilityOfElementLocated(By.id("RiskBandDetails:RiskBand_input"))).isDisplayed();
+        driver.findElement(By.id("RiskBandDetails:RiskBandDescription")).isDisplayed();
+        driver.findElement(By.id("RiskBandDetails:RiskRatingFrom_input")).isDisplayed();
+        driver.findElement(By.id("RiskBandDetails:RiskRatingTo_input")).isDisplayed();
+        driver.findElement(By.id("RiskBandDetails:NumOfDaysForTheAudit_input")).isDisplayed();
+        driver.findElement(By.id("RiskBandDetails:NumOfOfficersRequired_input")).isDisplayed();
+        driver.findElement(By.id("RiskBandDetails:OfficerGrade_label")).isDisplayed();
+        driver.findElement(By.id("RiskBandDetails:NumOfAuditsPerformed_input")).isDisplayed();
+        driver.findElement(By.id("RiskBandDetails:AuditFrequency_input")).isDisplayed();
+        driver.findElement(By.id("RiskBandDetails:Status_label")).isDisplayed();
+        driver.findElement(By.id("RiskBandDetails:Ok")).isDisplayed();
+        driver.findElement(By.id("RiskBandDetails:Cancel")).isDisplayed();
+
+    }
+
+
+    @Then("Select first table row in existing risk bands")
+    public void clickFirstTableRowInExistingRiskBands() throws InterruptedException {
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MaintainAuditRiskBands:RiskBandTable_data\"]/tr[1]/td[1]"))).click();
+        Thread.sleep(1000);
+
+    }
+
+    @Then("Click update button to update selected risk band")
+    public void clickUpdateButtonToUpdateSelectedRiskBand() {
+        driver.findElement(By.id("MaintainAuditRiskBands:RiskBandTable:btnUpdateRiskBand")).click();
+    }
+
+    @Then("Switch to frame")
+    public void switchToFrame() {
+        WebElement frame = fifteen.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("iframe")));
+        driver.switchTo().frame(frame);
+    }
+
+    @Then("Switch to default")
+    public void switchToDefault() {
+        driver.switchTo().defaultContent();
+    }
+
+    @Then("Fill in number of days of the audit field")
+    public void fillInNumberOfDaysOfTheAuditField() throws InterruptedException {
+
+        WebElement auditDaysField = fifteen.until(ExpectedConditions.visibilityOfElementLocated(By.id("RiskBandDetails:NumOfDaysForTheAudit_input")));
+        String current = auditDaysField.getAttribute("value");
+        System.out.println("Current value is "+current);
+        int newFigure = Integer.parseInt(current)+1;
+        auditDaysField.clear();
+        Thread.sleep(1000);
+        auditDaysField.sendKeys(String.valueOf(newFigure));
+        Thread.sleep(1000);
+        driver.findElement(By.id("RiskBandDetails:Ok")).click();
+        Thread.sleep(1000);
+
+    }
+
+    @Then("Verify success message {string}")
+    public void verifySuccessMessage(String Message) {
+        WebElement successMessage = sixty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'" + Message + "')]")));
+
+        if (successMessage.isDisplayed()) {
+            System.out.println("Success message ('" + Message + "') has been displayed");
+            Assert.assertTrue(true);
+        } else {
+            Assert.fail();
+        }
+    }
+
+    @Then("Verify error message {string}")
+    public void verifyErrorMessage(String Message) {
+        WebElement ErrorMessage = sixty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'" + Message + "')]")));
+
+        if (ErrorMessage.isDisplayed()) {
+            System.out.println("!!Error message ('" + Message + "') has been displayed");
+            Assert.assertTrue(true);
+        } else {
+            Assert.fail();
+        }
+    }
+
+    @Then("Click save to process risk band update")
+    public void clickSaveToProcessRiskBandUpdate() {
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainAuditRiskBands:SaveRiskBand"))).click();
+    }
+
+    @Then("Click view button to view selected risk band")
+    public void clickViewButtonToViewSelectedRiskBand() {
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainAuditRiskBands:RiskBandTable:btnViewRiskBand"))).click();
+    }
+
+    @Then("Verify view risk band field is readonly")
+    public void verifyViewRiskBandFieldIsReadonly() {
+        Assert.assertTrue("riskband field is disabled",!twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("RiskBandDetails:RiskBand_input"))).isEnabled());
+    }
+
+    @Then("Click add button to add risk band")
+    public void clickAddButtonToAddRiskBand() {
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainAuditRiskBands:RiskBandTable:btnAddRiskBand"))).click();
+    }
+
+
+    @Then("Click ok to trigger validation")
+    public void clickOkToTriggerValidation() {
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("RiskBandDetails:Ok"))).click();
+    }
+
+    @Then("Navigate to audit > Mantain risk indicators")
+    public void navigateToAuditMantainRiskIndicators() {
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Audit']"))).click();
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Maintain Risk Indicators']"))).click();
+    }
+
+    @Then("Verify fields in audit risk indicator screen")
+    public void verifyFieldsInAuditRiskIndicatorScreen() {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainRiskIndicators:TurnoverRiskIndicatorTable:btnAddTurnover"))).isDisplayed();
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainRiskIndicators:TurnoverRiskIndicatorTable:btnUpdateTurnover"))).isDisplayed();
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainRiskIndicators:TurnoverRiskIndicatorTable:btnViewTurnover"))).isDisplayed();
+
+    }
+
+    @Then("Click add to open risk indicator details screen")
+    public void clickAddToOpenRiskIndicatorDetailsScreen() {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainRiskIndicators:TurnoverRiskIndicatorTable:btnAddTurnover"))).click();
+
+    }
+
+    @Then("Verify fields in risk indicator details screen")
+    public void verifyFieldsInRiskIndicatorDetailsScreen() {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("TurnoverRiskIndicatorDetails:Name"))).isDisplayed();
+        driver.findElement(By.id("TurnoverRiskIndicatorDetails:TurnoverFrom_input")).isDisplayed();
+        driver.findElement(By.id("TurnoverRiskIndicatorDetails:TurnoverTo_input")).isDisplayed();
+        driver.findElement(By.id("TurnoverRiskIndicatorDetails:TurnoverScore_input")).isDisplayed();
+        driver.findElement(By.id("TurnoverRiskIndicatorDetails:Ok")).isDisplayed();
+        driver.findElement(By.id("TurnoverRiskIndicatorDetails:Cancel")).isDisplayed();
+    }
+
+    @Then("fill in Turnover risk indicator details")
+    public void fillInTurnoverRiskIndicatorDetails() throws InterruptedException {
+
+        WebElement currentTurnOverFromField =  twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("TurnoverRiskIndicatorDetails:TurnoverTo_input")));
+        String currentValue = currentTurnOverFromField.getAttribute("value");
+        System.out.println("Current value is "+currentValue);
+        int current = Integer.parseInt(currentValue.substring(0, currentValue.length() - 3).replace(",",""));
+        System.out.println("Value to update is "+current);
+        currentTurnOverFromField.clear();
+        Thread.sleep(1000);
+        currentTurnOverFromField.sendKeys(String.valueOf(current+10));
+        Thread.sleep(2000);
+        driver.findElement(By.id("TurnoverRiskIndicatorDetails:Ok")).click();
+    }
+
+    @Then("Select first table row in existing risk indicators")
+    public void selectFirstTableRowInExistingRiskIndicators() throws InterruptedException {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MaintainRiskIndicators:TurnoverRiskIndicatorTable_data\"]/tr/td[1]"))).click();
+        Thread.sleep(1000);
+        driver.findElement(By.id("MaintainRiskIndicators:TurnoverRiskIndicatorTable:btnUpdateTurnover")).click();
+
+    }
+
+    @Then("Click save to process risk indicator update")
+    public void clickSaveToProcessRiskIndicatorUpdate() {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("MaintainRiskIndicators:SaveRiskIndicator"))).click();
+    }
+
+    @Then("Select first table row to view existing risk indicators")
+    public void selectFirstTableRowToViewExistingRiskIndicators() throws InterruptedException {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"MaintainRiskIndicators:TurnoverRiskIndicatorTable_data\"]/tr/td[1]"))).click();
+        Thread.sleep(1000);
+        driver.findElement(By.id("MaintainRiskIndicators:TurnoverRiskIndicatorTable:btnViewTurnover")).click();
+    }
+
+    @Then("Verify fields in risk indicator details screen are read only")
+    public void verifyFieldsInRiskIndicatorDetailsScreenAreReadOnly() {
+        Assert.assertTrue("Turnover from field is disabled",!twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("TurnoverRiskIndicatorDetails:TurnoverFrom_input"))).isEnabled());
+    }
+
+    @Then("Click ok to trigger validation check in risk band details")
+    public void clickOkToTriggerValidationCheckInRiskBandDetails() {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("TurnoverRiskIndicatorDetails:Ok"))).click();
+    }
+
+    @Then("Navigate to audit > Create Audit Selection Profile")
+    public void navigateToAuditCreateAuditSelectionProfile() {
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Audit']"))).click();
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Create Audit Selection Profile']"))).click();
+    }
+
+    @Then("Enter profile name")
+    public void enterProfileName() {
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.id("AuditSelectionProfileDetails:auditProfileName"))).sendKeys(BaseClass.getRandom(6));
+    }
+
+
+    @And("Select selection profile office")
+    public void selectSelectionProfileOffice() throws InterruptedException {
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"AuditSelectionProfileDetails:Office\"]/div[3]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//li[contains(text(),'All')]")).click();
+    }
+
+    @And("Select Audit period start")
+    public void selectAuditPeriodStart() throws InterruptedException {
+        Thread.sleep(1000);
+        driver.findElement(By.id("AuditSelectionProfileDetails:AuditPeriodStart_input")).click();
+        driver.findElement(By.id("AuditSelectionProfileDetails:AuditPeriodStart_input")).sendKeys(Keys.ENTER);
+        Actions actions = new Actions(driver);
+        Thread.sleep(1000);
+        actions.sendKeys(Keys.TAB).perform();
+        Thread.sleep(1000);
+    }
+
+    @And("Select Audit period end")
+    public void selectAuditPeriodEnd() throws InterruptedException {
+        driver.findElement(By.id("AuditSelectionProfileDetails:AuditPeriodEnd_input")).sendKeys(BaseClass.tomorrowsDate());
+        Actions actions = new Actions(driver);
+//        Thread.sleep(1000);
+//        actions.sendKeys(Keys.TAB).perform();
+        Thread.sleep(1000);
+    }
+
+    @And("Select Profile status")
+    public void selectProfileStatus() throws InterruptedException {
+        driver.findElement(By.xpath("//*[@id=\"AuditSelectionProfileDetails:ProfileStatus\"]/div[3]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//li[contains(text(),'Active')]")).click();
+        Thread.sleep(1000);
+    }
+
+
+    @And("Select all industry sectors")
+    public void selectAllIndustrySectors() {
+        driver.findElement(By.xpath("//button[span='Add All']")).click();
+    }
+
+    @Then("Click save to submit audit profile")
+    public void clickSaveToSubmitAuditProfile() throws InterruptedException {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("AuditSelectionProfileDetails:Save"))).click();
+    }
+
+    @Then("Navigate to audit > Update Audit Selection Profile")
+    public void navigateToAuditUpdateAuditSelectionProfile() {
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Audit']"))).click();
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Update Audit Selection Profile']"))).click();
+    }
+
+    @Then("Enter audit selection profile id as {string} and click search")
+    public void enterAuditSelectionProfileIdAsAndClickSearch(String id) {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("SearchForm:profileiID"))).sendKeys(id);
+        driver.findElement(By.id("SearchForm:j_idt42")).click();
+    }
+
+    @Then("Update the audit selection profile status")
+    public void updateTheAuditSelectionProfileStatus() throws InterruptedException {
+
+        String currentStatus = twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("AuditSelectionProfileDetails:ProfileStatus_label"))).getText();
+        String nextStatus = "";
+        System.out.println("Current status is "+currentStatus);
+        if(currentStatus.equals("Active")){
+           nextStatus = "//li[contains(text(),'Inactive')]";
+        }
+        else if(currentStatus.equals("Inactive")){
+           nextStatus = "//li[contains(text(),'Active')]";
+        }
+
+        driver.findElement(By.xpath("//*[@id=\"AuditSelectionProfileDetails:ProfileStatus\"]/div[3]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath(nextStatus)).click();
+        Thread.sleep(1000);
+
+    }
+
+    @Then("Verify no data found in table")
+    public void verifyNoDataFoundInTable() {
+
+        Assert.assertTrue("",twenty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[contains(text(),'No record(s) found.')]"))).isDisplayed());
+
+    }
+
+    @Then("Navigate to audit > Run Audit Selection Profile")
+    public void navigateToAuditRunAuditSelectionProfile() {
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Audit']"))).click();
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Run Audit Selection Profile']"))).click();
+    }
+
+    @Then("Enter results to display as {string} and click run")
+    public void enterResultsToDisplayAsAndClickRun(String disp) {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("RunAuditSelectionProfile:resultsToDisplay"))).sendKeys(disp);
+        driver.findElement(By.id("RunAuditSelectionProfile:Run")).click();
+    }
+
+    @Then("Click accept button")
+    public void clickAcceptButton() {
+        twenty.until(ExpectedConditions.elementToBeClickable(By.id("RunAuditSelectionProfile:Accept")));
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("RunAuditSelectionProfile:Accept"))).click();
+    }
+
+    @Then("Click export as pdf")
+    public void clickExportAsPdf() {
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("RunAuditSelectionProfile:ExportPDF"))).click();
+
+    }
+    @Then("Click export as excel")
+    public void clickExportAsExcel() {
+        ten.until(ExpectedConditions.visibilityOfElementLocated(By.id("RunAuditSelectionProfile:ExportExcel"))).click();
+    }
+
+
+
+    public boolean isFileDownloaded(String downloadPath, String fileName) {
+        File dir = new File(downloadPath);
+        File[] dirContents = dir.listFiles();
+        for (int i = 0; i < dirContents.length; i++) {
+            if (dirContents[i].getName().equals(fileName)) {
+                // File has been found, it can now be deleted:
+                dirContents[i].delete();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Then("^Verify file \"([^\"]*)\" has been downloaded in downloads directory \"([^\"]*)\"$")
+    public void verify_file_has_been_downloaded_in_downloads_directory(String fileName, String downloadPath) throws Throwable {
+        Thread.sleep(10000);
+        if (isFileDownloaded(downloadPath, fileName)) {
+            System.out.println(fileName + ": has been downloaded");
+            Assert.assertTrue(true);
+        } else {
+            Assert.assertFalse(fileName + ": has not been downloaded", false);
+        }
+    }
+
+
+    @Then("Click cancel so as not to save profile")
+    public void clickCancelSoAsNotToSaveProfile() {
+        twenty.until(ExpectedConditions.elementToBeClickable(By.id("RunAuditSelectionProfile:Accept")));
+        driver.findElement(By.id("RunAuditSelectionProfile:cancel")).click();
+    }
+
+    @Then("^User is navigated back to homepage \"([^\"]*)\"$")
+    public void user_is_navigated_back_to_homepage_something(String url) throws Throwable {
+        Thread.sleep(4000);
+        String URL = driver.getCurrentUrl();
+        Assert.assertEquals(url,URL );
+    }
+
+    @Then("Navigate to audit > View visit selection report")
+    public void navigateToAuditViewVisitSelectionReport() {
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='Audit']"))).click();
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[span='View Visit Selection Report']"))).click();
+    }
+
+    @Then("verify fields in view visit selection reports screen")
+    public void verifyFieldsInViewVisitSelectionReportsScreen() {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("SearchForm:ReportId"))).isDisplayed();
+        driver.findElement(By.id("SearchForm:ReportName")).isDisplayed();
+        driver.findElement(By.id("SearchForm:DateGeneartedFrom_input")).isDisplayed();
+        driver.findElement(By.id("SearchForm:ReportName")).isDisplayed();
+        driver.findElement(By.id("SearchForm:DateGeneartedTo_input")).isDisplayed();
+        driver.findElement(By.id("SearchForm:j_idt42")).isDisplayed();
+        driver.findElement(By.id("SearchForm:j_id13")).isDisplayed();
+    }
+
+    @Then("Enter report ID as {string} and click search")
+    public void enterReportIDAsAndClickSearch(String id) {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("SearchForm:ReportId"))).sendKeys(id);
+        driver.findElement(By.id("SearchForm:j_idt42")).click();
+    }
+
+    @Then("Verify same report ID {string} is displayed")
+    public void verifySameReportIDIsDisplayed(String id) {
+        System.out.println(twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("ViewVisitSelectionReport:reportId"))).getAttribute("value"));
+        Assert.assertTrue("Data is displayed",twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("ViewVisitSelectionReport:reportId"))).getAttribute("value").equals(id));
+    }
+
+    @Then("Export view selection report as pdf")
+    public void exportViewSelectionReportAsPdf() {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("ViewVisitSelectionReport:ExportPDF"))).click();
+    }
+
+    @Then("Export view selection report as excel")
+    public void exportViewSelectionReportAsExcel() {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("ViewVisitSelectionReport:ExportExcel"))).click();
+    }
 }
 
 
