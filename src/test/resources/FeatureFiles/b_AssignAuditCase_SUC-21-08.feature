@@ -6,7 +6,8 @@ Feature: [SUC:21-08] Assign an Audit Case
     And Close Popup Window
     And Click on Case management dropdown
     And click on Queues
-    Then switch to frame0
+   Then switch to frame0
+#   And select queues im a member of
     And enters Audit reference number in search results
     And picks the audit case
     And click assign button
