@@ -23,7 +23,7 @@ Feature: [SUC:21-12] Create Preliminary Audit Finding
       | Number of Visits | 1              |
       | Contact Person   | testLeader     |
       | SUBJECT          | testObjectives |
-      | BACKGROUND      | testInfo       |
+      | BACKGROUND       | testInfo       |
       | CONCLUSION       | testAnalysis   |
     And Click on Save button
     Then Audit status should be "Execution"
