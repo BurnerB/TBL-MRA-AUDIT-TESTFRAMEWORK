@@ -120,6 +120,17 @@ public class stepDefinitions extends BaseClass {
         driver.findElement(By.xpath("//*[text()='Queues']")).click();
     }
 
+    @And("^select queues im a member of$")
+    public void select_queues_im_a_member_of() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement queueSelector = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("crmQueueSelector")));
+        queueSelector.click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[contains(text(),'Queues I'm a member of')]")).click();
+
+
+    }
+
 
     @Then("^switch to frame0$")
     public void switch_to_frame0() throws Throwable {
@@ -148,8 +159,8 @@ public class stepDefinitions extends BaseClass {
 
         search.clear();
         Thread.sleep(2000);
-        search.sendKeys("*AV/000000875/2021");
-//        search.sendKeys("*"+sharedatastep.AUD_CRMARN);
+//        search.sendKeys("*AV/000001695/2021");
+        search.sendKeys("*"+sharedatastep.AUD_CRMARN);
         Thread.sleep(2000);
         search.sendKeys(Keys.ENTER);
 
@@ -178,6 +189,16 @@ public class stepDefinitions extends BaseClass {
     }
     @And("^click pick button$")
     public void click_pick_button() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+//        WebElement assignDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("moreCommands")));
+//        assignDropdown.click();
+
+        WebElement pickButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("queueitem|NoRelationship|HomePageGrid|tbg.queueitem.HomepageGrid.Pick")));
+        pickButton.click();
+    }
+
+    @And("^click pick button dropdown$")
+    public void click_pick_button_dropdown() throws Throwable {
         WebDriverWait wait = new WebDriverWait(driver, 20);
         WebElement assignDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("moreCommands")));
         assignDropdown.click();
@@ -334,7 +355,7 @@ public class stepDefinitions extends BaseClass {
 
     @And("^verifies \"([^\"]*)\" entry fields are displayed$")
     public void verifies_something_entry_fields_are_displayed(String strArg1) throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
         WebElement loadFrame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("WebResource_AuditApplicationAngular")));
         driver.switchTo().frame(loadFrame);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -550,7 +571,7 @@ public class stepDefinitions extends BaseClass {
 
     @And("^enters AUDIT SCOPE METHODOLOGY$")
     public void enters_audit_scope_methodology(DataTable auditScopeTable ) throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
 
         List<List<String>> data = auditScopeTable.asLists();
 
@@ -566,22 +587,31 @@ public class stepDefinitions extends BaseClass {
         WebElement taxTypeDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-dropdown[1]/div/div[2]/div/p-dropdown/div/label")));
         taxTypeDropdown.click();
         Thread.sleep(4000);
-        driver.findElement(By.xpath("//li[@class='ng-tns-c7-5 ui-dropdown-item ui-corner-all ng-star-inserted' and contains(., '" + data.get(0).get(1) +"')]")).click();
 
+//    Confirm if class names are still as is
+//        driver.findElement(By.xpath("//li[@class='ng-tns-c6-5 ui-dropdown-item ui-corner-all ui-state-highlight ng-star-inserted' and contains(., '" + data.get(0).get(1) +"')]")).click();
+        driver.findElement(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-dropdown[1]/div/div[2]/div/p-dropdown/div/div[4]/div[2]/ul/li[4]/span")).click();
+
+        Thread.sleep(3000);
         WebElement periodDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-dropdown[2]/div/div[2]/div/p-dropdown/div")));
         periodDropdown.click();
         Thread.sleep(4000);
-        driver.findElement(By.xpath("//li[@class='ng-tns-c7-6 ui-dropdown-item ui-corner-all ng-star-inserted' and contains(., '" + data.get(1).get(1) +"')]")).click();
+
+//        driver.findElement(By.xpath("//span[@class='ng-tns-c6-8 ng-star-inserted' and contains('" + data.get(1).get(1) +"')]")).click();
+        driver.findElement(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-dropdown[2]/div/div[2]/div/p-dropdown/div/div[4]/div[2]/ul/li[2]")).click();
 
         WebElement riskAreaDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-dropdown[3]/div/div[2]/div/p-dropdown/div/label")));
         riskAreaDropdown.click();
         Thread.sleep(4000);
-        driver.findElement(By.xpath("//li[@class='ng-tns-c7-7 ui-dropdown-item ui-corner-all ng-star-inserted' and contains(., '" + data.get(2).get(1) +"')]")).click();
+
+//        driver.findElement(By.xpath("//li[@class='ng-tns-c7-7 ui-dropdown-item ui-corner-all ng-star-inserted' and contains(., '" + data.get(2).get(1) +"')]")).click();
+        driver.findElement(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-dropdown[3]/div/div[2]/div/p-dropdown/div/div[4]/div[2]/ul/li[2]")).click();
 
         WebElement percievedriskDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-dropdown[4]/div/div[2]/div/p-dropdown/div/label")));
         percievedriskDropdown.click();
         Thread.sleep(4000);
-        driver.findElement(By.xpath("//li[@class='ng-tns-c7-8 ui-dropdown-item ui-corner-all ng-star-inserted' and contains(., '" + data.get(2).get(1) +"')]")).click();
+//        driver.findElement(By.xpath("//li[@class='ng-tns-c7-8 ui-dropdown-item ui-corner-all ng-star-inserted' and contains(., '" + data.get(2).get(1) +"')]")).click();
+        driver.findElement(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-dropdown[4]/div/div[2]/div/p-dropdown/div/div[4]/div[2]/ul/li[2]")).click();
 
         WebElement materiality = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-input-text[1]/div/div[2]/div/input")));
         materiality.sendKeys(data.get(3).get(1));
@@ -604,7 +634,7 @@ public class stepDefinitions extends BaseClass {
 
     @And("^Clicks submit audit plan button$")
     public void clicks_submit_audit_plan_button() throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
 
         WebElement submitButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-audit-case-plan/div/form/div[9]/div/div/button")));
 
@@ -914,6 +944,128 @@ public class stepDefinitions extends BaseClass {
         WebElement frame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("WebResource_AuditApplicationAngular")));
         driver.switchTo().frame(frame);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[text()='"+strArg1+"']")));
+    }
+
+//-----------------------------------------------------Print Audit Processing Reports--------------------------------------------------------------------------------///
+    @Then("^Goto reporting link$")
+    public void goto_reporting_link() throws Throwable {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebElement reporting = driver.findElement(By.xpath(Pro.getProperty("Reporting_Link_Xapth")));
+        reporting.click();
+
+
+    }
+
+    @Then("^click on  Reports link$")
+    public void click_on_Reports_link() throws Throwable {
+        WebElement Reports = driver.findElement(By.xpath(Pro.getProperty("Reporting_Reports_Link_Xapth")));
+        Reports.click();
+
+
+        //ReportTree:t1:3:j_idt42
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,750)", "");
+
+
+    }
+
+    @Then("^Click on Refund Claims Paid Report$")
+    public void click_on_Refund_Claims_Paid_Report() throws Throwable {
+        driver.findElement(By.xpath("//a[contains(text(),''")).click();
+        //span[contains(text(),'Processing Completed')]
+
+    }
+
+    @And("^Clicks on Audit Report \"([^\"]*)\"$")
+    public void clicks_on_audit_report_something(String strArg1) throws Throwable {
+        driver.findElement(By.xpath("//*[text()='"+strArg1 +"']")).click();
+//        driver.findElement(By.xpath("//*[text()='"+TaxType+"']"));
+    }
+
+    @And("^Enter Report Paramenters (.+) , (.+) and (.+)$")
+    public void enter_report_paramenters_and(String startdate, String enddate, String taxoffice) throws Throwable {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        //StartDate
+        WebElement startDateInput = driver.findElement(By.id("frmReportDetails:StartDate_input"));
+        startDateInput.sendKeys(startdate);
+//        date.sendKeys(Keys.ESCAPE);
+
+
+        //enddate
+        Thread.sleep(4000);
+        WebElement endDateInput = driver.findElement(By.id("frmReportDetails:EndDate_input"));
+        endDateInput.sendKeys(enddate);
+        endDateInput.sendKeys(Keys.ESCAPE);
+        Thread.sleep(4000);
+
+
+        //////TaxOffice
+        WebElement TaxOfficelist = driver.findElement(By.id("frmReportDetails:TAX_OFFICE_label"));
+        TaxOfficelist.click();
+        Thread.sleep(4000);
+
+//        WebElement TaxOffice=driver.findElement(By.xpath("//li[contains(text(),'"+taxoffice+"')]"));
+        WebElement TaxOffice = driver.findElement(By.id("frmReportDetails:TAX_OFFICE_2"));
+        TaxOffice.click();
+
+    }
+
+    @Then("^Click on Run Report button$")
+    public void click_on_Run_Report_button() throws Throwable {
+
+        driver.findElement(By.id(Pro.getProperty("Reporting_Reports_RefundClaimsPaidReport_RunReport_button_ID"))).click();
+
+        Thread.sleep(5000);
+
+
+    }
+
+    @Then("^Click on Cancel Report button$")
+    public void click_on_Cancel_Report_button() throws Throwable {
+
+        driver.findElement(By.id(Pro.getProperty("Reporting_Reports_RefundClaimsPaidReport_CancelReport_button_ID"))).click();
+
+        Thread.sleep(5000);
+
+
+    }
+
+    @Then("^verify file downloaded \"([^\"]*)\"$")
+    public void verify_file_downloaded_and(String fileName) throws Throwable {
+        boolean isPresent = false;
+        File dir = new File("C:\\Users\\barnaby.kamau\\Downloads");
+        File[] dir_contents = dir.listFiles();
+
+        for (int i = 0; i < dir_contents.length; i++) {
+            if (dir_contents[i].getName().equals(fileName)) {
+                isPresent = true;
+            }
+            Thread.sleep(3000);
+        }
+
+
+        org.junit.Assert.assertTrue(isPresent);
+
+    }
+
+    @Then("^message is displayed \"([^\"]*)\"$")
+    public void message_is_displayed_something(String strArg1) throws Throwable {
+//    	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+
+        WebElement Message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'" + strArg1 + "')]")));
+        if (Message.isDisplayed()) {
+            Assert.assertTrue("Error message displayed", true);
+        } else {
+            Assert.fail("No Error message displayed");
+        }
+    }
+
+    @Then("^should return to reports page$")
+    public void should_return_to_reports_page() throws Throwable {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebElement reportsPage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ReportTree:ReportReprintLabel")));
+        Assert.assertTrue(reportsPage.isDisplayed());
     }
 
 
