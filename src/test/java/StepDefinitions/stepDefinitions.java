@@ -143,7 +143,6 @@ public class stepDefinitions extends BaseClass  {
     //---------------------------------------------------------------------Verify the Process of Assign Audit Case-----------------------------------------------------------------------------------------------//
     @Given("^Open CRM URL Module as \"([^\"]*)\"$")
     public void open_crm_url_module_as_something(String strArg1) throws Throwable {
-        driver = getDriver();
         driver.get("https://" + strArg1 + ":Passw0rd@trips-crm.mra.mw:5555/TripsWorkflow/main.aspx");
     }
 
@@ -195,8 +194,8 @@ public class stepDefinitions extends BaseClass  {
 
         search.clear();
         Thread.sleep(2000);
-        search.sendKeys("*AV/000000875/2021");
-//        search.sendKeys("*"+sharedatastep.AUD_CRMARN);
+        //   search.sendKeys("*AV/000000875/2021");
+        search.sendKeys("*"+sharedatastep.AUD_CRMARN);
         Thread.sleep(2000);
         search.sendKeys(Keys.ENTER);
 
@@ -216,7 +215,7 @@ public class stepDefinitions extends BaseClass  {
 
     @And("^click assign button$")
     public void click_assign_button() throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 50);
         WebElement assignDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("moreCommands")));
         assignDropdown.click();
 
@@ -225,7 +224,7 @@ public class stepDefinitions extends BaseClass  {
     }
     @And("^click pick button$")
     public void click_pick_button() throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 50);
         WebElement assignDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("moreCommands")));
         assignDropdown.click();
 

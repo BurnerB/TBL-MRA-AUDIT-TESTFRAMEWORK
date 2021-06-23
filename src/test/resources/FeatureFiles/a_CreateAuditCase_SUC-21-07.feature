@@ -14,8 +14,8 @@ Feature: [SUC:21-07] Create Audit Case
 
 
     Examples:
-      | ARN                                           |
-      | Processing Completed - Reference Number|
+      | ARN                                     |
+      | Processing Completed - Reference Number |
 
 
 
