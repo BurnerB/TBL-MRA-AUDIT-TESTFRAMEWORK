@@ -34,7 +34,7 @@ public class Hooks extends BaseClass {
 
 	{
 
-		driver.close();
+		//driver.close();
 		System.out.println("Completed execution for the scenario :" + scenario.getName());
 
 	}

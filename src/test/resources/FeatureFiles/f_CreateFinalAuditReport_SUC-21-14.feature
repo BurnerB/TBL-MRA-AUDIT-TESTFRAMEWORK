@@ -97,7 +97,7 @@ Feature: [SUC:21-14] Create Final Audit Report & [SUC:21-16] Officer's Assessmen
       | Addressee | Address |
       |           |         |
 
-  @UAT_M8-21-14-06 @CREATE--
+  @UAT_M8-21-14-06 @CREATE
 #  ([SUC:21-16] Officer's Assessment)
   Scenario Outline: UAT_M8-21-14-06-UAT_M8-21-16-01-UAT_M8-21-16-02-Verify the Process of  Officer's Assessment-Verify the Process of  Update Final Audit Report-Verify the Process of  Officer's Assessment-Verify the Process of  Maintain Officer's Assessment([SUC:21-16] Officer's Assessment)
     Given Open CRM URL Module as "AuditorUser1"
@@ -126,7 +126,7 @@ Feature: [SUC:21-14] Create Final Audit Report & [SUC:21-16] Officer's Assessmen
       | testData  | testInfo |
 
 
-  @UAT_M8-21-12-05 @CREATE--
+  @UAT_M8-21-12-05 @CREATE
   Scenario: UAT_M8-21-14-04-Verify the Process of Submit Final Audit Report
     Given Open CRM URL Module as "AuditorUser1"
     And Close Popup Window
