@@ -158,7 +158,8 @@ public class stepDefinitions extends BaseClass  {
 
     @And("^Click on Case management dropdown$")
     public void click_on_case_management_dropdown() throws Throwable {
-        driver.findElement(By.xpath("//*[@id=\"TabCS\"]/a/span")).click();
+        Thread.sleep(2000);
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"TabCS\"]/a"))).click();
     }
 
     @And("^click on Queues$")
@@ -208,7 +209,7 @@ public class stepDefinitions extends BaseClass  {
         search.clear();
         Thread.sleep(2000);
 
-        //   search.sendKeys("*AV/000000875/2021");
+//           search.sendKeys("*AV/000003368/2021");
         search.sendKeys("*"+sharedatastep.AUD_CRMARN);
         Thread.sleep(2000);
         search.sendKeys(Keys.ENTER);
@@ -218,14 +219,20 @@ public class stepDefinitions extends BaseClass  {
 
     @And("^picks the audit case$")
     public void picks_the_audit_case() throws Throwable {
+        Thread.sleep(4000);
         WebElement pickCheckBox = driver.findElement(By.xpath("//input[@type='checkbox']"));
 
         Actions actions = new Actions(driver);
-        actions.doubleClick(pickCheckBox).perform();
+        actions.click(pickCheckBox).perform();
 
         driver.switchTo().defaultContent();
     }
-
+    @And("^pick the case$")
+    public void pick_the_case() throws Throwable {
+        WebElement pickButton = sixty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()=' Pick ']")));
+        Actions actions = new Actions(driver);
+        actions.doubleClick(pickButton).perform();
+    }
 
     @And("^click assign button$")
     public void click_assign_button() throws Throwable {
@@ -239,10 +246,9 @@ public class stepDefinitions extends BaseClass  {
     @And("^click pick button$")
     public void click_pick_button() throws Throwable {
 
-        WebDriverWait wait = new WebDriverWait(driver, 50);
-
-//        WebElement assignDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("moreCommands")));
-//        assignDropdown.click();
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebElement assignDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("moreCommands")));
+        assignDropdown.click();
 
         WebElement pickButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("queueitem|NoRelationship|HomePageGrid|tbg.queueitem.HomepageGrid.Pick")));
         pickButton.click();
@@ -276,9 +282,6 @@ public class stepDefinitions extends BaseClass  {
 //        WebElement createAuditPlan = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='"+strArg1+"']")));
 
         WebElement createAuditPlan = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"tbg_auditapplication|NoRelationship|Form|tbg.tbg_auditapplication.CreateAuditPlan.Button\"]/span/a/span")));
-
-
-
         Assert.assertTrue(createAuditPlan.isDisplayed());
     }
 
@@ -286,15 +289,15 @@ public class stepDefinitions extends BaseClass  {
 
     @Then("^Assign pop up is displayed$")
     public void assign_pop_up_is_displayed() throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        WebElement assignPopup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("InlineDialog")));
+
+        WebElement assignPopup = onehundred.until(ExpectedConditions.visibilityOfElementLocated(By.id("InlineDialog")));
         Assert.assertTrue(assignPopup.isDisplayed());
 
         driver.switchTo().frame("InlineDialog_Iframe");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 
-        WebElement popupHeader = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("assignheader_id")));
+        WebElement popupHeader = fifty.until(ExpectedConditions.visibilityOfElementLocated(By.id("assignheader_id")));
         String popupHeaderText = popupHeader.getText();
         Assert.assertEquals("Assign to Team or User", popupHeaderText);
 
@@ -379,8 +382,7 @@ public class stepDefinitions extends BaseClass  {
 
     @When("^clicks create audit plan$")
     public void clicks_create_audit_plan() throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        WebElement createAuditPlan = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()=' Create Audit Plan ']")));
+        WebElement createAuditPlan = seventy.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()=' Create Audit Plan ']")));
         createAuditPlan.click();
 
     }
@@ -407,12 +409,12 @@ public class stepDefinitions extends BaseClass  {
 
     @And("^verifies \"([^\"]*)\" entry fields are displayed$")
     public void verifies_something_entry_fields_are_displayed(String strArg1) throws Throwable {
-        WebDriverWait wait = new WebDriverWait(driver, 60);
-        WebElement loadFrame = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("WebResource_AuditApplicationAngular")));
+
+        WebElement loadFrame = onehundred.until(ExpectedConditions.visibilityOfElementLocated(By.id("WebResource_AuditApplicationAngular")));
         driver.switchTo().frame(loadFrame);
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
-        WebElement createAuditPlan = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='" + strArg1 + "']")));
+        WebElement createAuditPlan = onehundred.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='" + strArg1 + "']")));
         Assert.assertTrue(createAuditPlan.isDisplayed());
 
     }
@@ -945,6 +947,7 @@ public class stepDefinitions extends BaseClass  {
         WebElement searchButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@type='submit' and span='Search']")));
         searchButton.click();
 
+        switchToDefault();
         boolean TIN= wait.until(ExpectedConditions.textToBePresentInElementValue(By.id("AuditAndVisitCaseForm:TIN"), strArg1));
         Assert.assertTrue(TIN);
 

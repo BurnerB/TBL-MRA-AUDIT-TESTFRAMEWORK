@@ -14,6 +14,7 @@ Feature: [SUC:21-08] Assign an Audit Case
     Then Assign pop up is displayed
     And search team to assign
     And selects the team "Auditor Team"
+    Then Switch to default
     Then Assign pop up is displayed
     And assigns to the team or user
 

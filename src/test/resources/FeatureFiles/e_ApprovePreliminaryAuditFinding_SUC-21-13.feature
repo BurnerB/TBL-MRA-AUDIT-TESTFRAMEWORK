@@ -9,7 +9,7 @@ Feature: [SUC:21-13] Approve Preliminary Audit Finding
     Then switch to frame0
     And enters Audit reference number in search results
     And picks the audit case
-    And click pick button dropdown
+    And pick the case
     Then switch to frame0
     Then Click on reference number
     Then Audit status should be "Pending Preliminary Audit Approval"
