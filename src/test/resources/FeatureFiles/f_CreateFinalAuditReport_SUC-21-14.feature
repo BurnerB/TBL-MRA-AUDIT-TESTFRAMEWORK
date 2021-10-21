@@ -120,7 +120,6 @@ Feature: [SUC:21-14] Create Final Audit Report & [SUC:21-16] Officer's Assessmen
     And verifies " FINAL AUDIT REPORT " entry fields are displayed
     And Click on Save button
     Then Audit status should be "Reporting"
-
     Examples:
       | Addressee | Address  |
       | testData  | testInfo |

@@ -8,7 +8,7 @@ Feature: [SUC:21-07] Create Audit Case
   @UAT_M8-21-07-01 @CREATE
   Scenario Outline: UAT_M8-21-07-01-UAT_M8-21-07-02-Verify the Process of Create Audit Case Manually
     Given User navigates to Audit>>Create case manually
-    And enters taxpayer details "C0102633" and "Notes"
+    And enters taxpayer details "P0102716" and "Notes"
     And clicks on the create audit case button
     And  Verify the ARN number "<ARN>"
 

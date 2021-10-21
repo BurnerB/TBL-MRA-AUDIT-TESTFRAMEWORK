@@ -158,14 +158,16 @@ public class stepDefinitions extends BaseClass  {
 
     @And("^Click on Case management dropdown$")
     public void click_on_case_management_dropdown() throws Throwable {
-        Thread.sleep(2000);
-        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"TabCS\"]/a"))).click();
+        Thread.sleep(7000);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"TabCS\"]/a"))).isDisplayed();
+        driver.findElement(By.xpath("//*[@id=\"TabCS\"]/a")).click();
     }
 
     @And("^click on Queues$")
     public void click_on_revenue_collection_application() throws Throwable {
-        Thread.sleep(2000);
-        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Queues']"))).click();
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//*[text()='Queues']")).click();
 
     }
 
@@ -209,7 +211,7 @@ public class stepDefinitions extends BaseClass  {
         search.clear();
         Thread.sleep(2000);
 
-//           search.sendKeys("*AV/000003368/2021");
+          //search.sendKeys("*AV/000003419/2021");
         search.sendKeys("*"+sharedatastep.AUD_CRMARN);
         Thread.sleep(2000);
         search.sendKeys(Keys.ENTER);
@@ -644,7 +646,8 @@ public class stepDefinitions extends BaseClass  {
 
 //    Confirm if class names are still as is
 //        driver.findElement(By.xpath("//li[@class='ng-tns-c6-5 ui-dropdown-item ui-corner-all ui-state-highlight ng-star-inserted' and contains(., '" + data.get(0).get(1) +"')]")).click();
-        driver.findElement(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-dropdown[1]/div/div[2]/div/p-dropdown/div/div[4]/div[2]/ul/li[4]/span")).click();
+        //driver.findElement(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-dropdown[1]/div/div[2]/div/p-dropdown/div/div[4]/div[2]/ul/li[4]/span")).click();
+        driver.findElement(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-dropdown[1]/div/div[2]/div/p-dropdown/div/div[4]/div[2]/ul/li[6]/span")).click();
 
         Thread.sleep(3000);
         WebElement periodDropdown = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/trips-app/div/app-audit/app-add-update-case-plan/div/form/div[1]/div/div/tb-dropdown[2]/div/div[2]/div/p-dropdown/div")));
