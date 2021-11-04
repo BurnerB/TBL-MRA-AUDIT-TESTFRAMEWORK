@@ -12,7 +12,7 @@ Feature: [SUC:21-18] Print Audit Processing Reports
     And Clicks on Audit Report "Audit Case Details by Tax Office"
     And Enter Report Paramenters <StartDate> , <EndDate> and <TaxOffice>
     And Click on Run Report button
-    Then Verify file "<Filename>" has been downloaded in downloads directory "C:\\Users\\maxma\\Downloads"
+    Then Verify file "<Filename>" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
     Examples:
       | StartDate  | EndDate    | TaxOffice | Filename                             |
       | 01/07/2018 | 01/07/2019 | Balaka    | Audit Case Details by Tax Office.pdf |
@@ -24,7 +24,7 @@ Feature: [SUC:21-18] Print Audit Processing Reports
     And Clicks on Audit Report "Audit Performance Statistics"
     And Enter Report Paramenters <StartDate> , <EndDate> and <TaxOffice>
     And Click on Run Report button
-    Then Verify file "<Filename>" has been downloaded in downloads directory "C:\\Users\\maxma\\Downloads"
+    Then Verify file "<Filename>" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
     Examples:
       | StartDate  | EndDate    | TaxOffice | Filename                             |
       | 01/07/2018 | 01/07/2019 | Balaka    | Audit Performance Statistics.pdf |
@@ -36,7 +36,7 @@ Feature: [SUC:21-18] Print Audit Processing Reports
     And Clicks on Audit Report "Audit Performance Summary Report"
     And Enter Report Paramenters <StartDate> , <EndDate> and <TaxOffice>
     And Click on Run Report button
-    Then Verify file "<Filename>" has been downloaded in downloads directory "C:\\Users\\maxma\\Downloads"
+    Then Verify file "<Filename>" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
     Examples:
       | StartDate  | EndDate    | TaxOffice | Filename                             |
       | 01/07/2018 | 01/07/2019 | Balaka    | Audit Performance Summary Report.pdf |
@@ -48,7 +48,7 @@ Feature: [SUC:21-18] Print Audit Processing Reports
     And Clicks on Audit Report "Audit Case Status Report"
     And Enter Report Paramenters <StartDate> , <EndDate> and <TaxOffice>
     And Click on Run Report button
-    Then Verify file "<Filename>" has been downloaded in downloads directory "C:\\Users\\maxma\\Downloads"
+    Then Verify file "<Filename>" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
     Examples:
       | StartDate  | EndDate    | TaxOffice | Filename                             |
       | 01/07/2018 | 01/07/2019 | Balaka    | Audit Case Status Report.pdf |

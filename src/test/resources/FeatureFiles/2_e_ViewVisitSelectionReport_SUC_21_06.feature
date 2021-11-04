@@ -29,6 +29,6 @@ Feature: [SUC:21-06] View Visit Selection Report
   Scenario: UAT_M8-21-06-05-Verify the process of export report
     Then Enter report ID as "VR000000021" and click search
     Then Export view selection report as pdf
-    Then Verify file "AuditProfileSelectionReport.pdf" has been downloaded in downloads directory "C:\\Users\\maxma\\Downloads"
+    Then Verify file "AuditProfileSelectionReport.pdf" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"
     Then Export view selection report as excel
-    Then Verify file "AuditProfileSelectionReport.xls" has been downloaded in downloads directory "C:\\Users\\maxma\\Downloads"
+    Then Verify file "AuditProfileSelectionReport.xls" has been downloaded in downloads directory "C:\\Users\\Maxipain\\Downloads"

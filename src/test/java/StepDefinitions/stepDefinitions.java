@@ -74,6 +74,7 @@ public class stepDefinitions extends BaseClass  {
 
     public static sharedatastep sharedata;
 
+
     public stepDefinitions(sharedatastep sharedata) {
 
         stepDefinitions.sharedata = sharedata;
@@ -158,16 +159,18 @@ public class stepDefinitions extends BaseClass  {
 
     @And("^Click on Case management dropdown$")
     public void click_on_case_management_dropdown() throws Throwable {
-        Thread.sleep(7000);
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"TabCS\"]/a"))).isDisplayed();
-        driver.findElement(By.xpath("//*[@id=\"TabCS\"]/a")).click();
+        switch_to_frame0();
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Active Cases in Progress Overview')]"))).isDisplayed();
+        switchToDefault();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//*[@id=\"TabCS\"]/a/span")).click();
+
     }
 
     @And("^click on Queues$")
     public void click_on_revenue_collection_application() throws Throwable {
         Thread.sleep(3000);
-        driver.findElement(By.xpath("//*[text()='Queues']")).click();
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Queues']"))).click();
 
     }
 
@@ -1352,7 +1355,8 @@ public class stepDefinitions extends BaseClass  {
 
     @Then("Enter profile name")
     public void enterProfileName() {
-        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.id("AuditSelectionProfileDetails:auditProfileName"))).sendKeys(BaseClass.getRandom(6));
+        sharedatastep.AuditProfileName = getRandom(6);
+        thirty.until(ExpectedConditions.visibilityOfElementLocated(By.id("AuditSelectionProfileDetails:auditProfileName"))).sendKeys(sharedatastep.AuditProfileName);
     }
 
 
@@ -1415,6 +1419,12 @@ public class stepDefinitions extends BaseClass  {
         driver.findElement(By.id("SearchForm:j_idt42")).click();
     }
 
+    @Then("Search for audit selection profile")
+    public void searchForAuditSelectionProfile() {
+        twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("SearchForm:profileName"))).sendKeys(sharedatastep.AuditProfileName);
+        driver.findElement(By.id("SearchForm:j_idt42")).click();
+    }
+
     @Then("Update the audit selection profile status")
     public void updateTheAuditSelectionProfileStatus() throws InterruptedException {
 
@@ -1431,7 +1441,14 @@ public class stepDefinitions extends BaseClass  {
         driver.findElement(By.xpath("//*[@id=\"AuditSelectionProfileDetails:ProfileStatus\"]/div[3]")).click();
         Thread.sleep(1000);
         driver.findElement(By.xpath(nextStatus)).click();
+        Thread.sleep(3000);
+
+        driver.findElement(By.xpath("//*[@id=\"AuditSelectionProfileDetails:Office\"]/div[3]")).click();
         Thread.sleep(1000);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).perform();
+
+
 
     }
 
@@ -1548,6 +1565,7 @@ public class stepDefinitions extends BaseClass  {
     public void exportViewSelectionReportAsExcel() {
         twenty.until(ExpectedConditions.visibilityOfElementLocated(By.id("ViewVisitSelectionReport:ExportExcel"))).click();
     }
+
 }
 
 

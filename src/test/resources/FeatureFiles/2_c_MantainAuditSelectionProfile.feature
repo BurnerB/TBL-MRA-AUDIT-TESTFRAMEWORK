@@ -6,7 +6,7 @@ Feature: [SUC:21-03] Maintain Audit Selection Profile
     Then User should be logged in
 
 
-  @SUC:21-03 @UAT_M8-21-03-01 @UAT_M8-21-03-02 @backoffice
+  @SUC:21-03 @UAT_M8-21-03-01 @UAT_M8-21-03-02 @backoffice @boom
   Scenario: UAT_M8-21-03-02-Verify the process of mantain Audit profile
     Then Navigate to audit > Create Audit Selection Profile
     Then Enter profile name
@@ -18,10 +18,11 @@ Feature: [SUC:21-03] Maintain Audit Selection Profile
     Then Click save to submit audit profile
     Then Verify success message "Audit profile details successfully saved."
 
-  @SUC:21-03  @UAT_M8-21-03-03 @backoffice
+  @SUC:21-03  @UAT_M8-21-03-03 @backoffice @boom
   Scenario: UAT_M8-21-03-03-Verify the process of Update audit profile
     Then Navigate to audit > Update Audit Selection Profile
     Then Enter audit selection profile id as "AP000000121" and click search
+#    Then Search for audit selection profile
     Then Update the audit selection profile status
     Then Click save to submit audit profile
     Then Verify success message "Audit profile details successfully saved."
